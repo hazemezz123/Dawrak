@@ -5,7 +5,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from '../context/AuthContext.js';
 import LoginPage from '../pages/LoginPage.js';
 import AdminDashboardPage from '../pages/AdminDashboardPage.js';
-import { StaffWindowRoute } from '../App.js';
+import App, { StaffWindowRoute } from '../App.js';
 import * as api from '../lib/api.js';
 
 vi.mock('../lib/api.js', async () => {
@@ -37,6 +37,17 @@ describe('Frontend Auth & Admin Tests (Part 7)', () => {
       defaultOptions: { queries: { retry: false } },
     });
     vi.clearAllMocks();
+  });
+
+  it('redirects the root path to the login page', async () => {
+    vi.mocked(api.fetchCurrentUser).mockRejectedValueOnce(new Error('Unauthorized'));
+    window.history.pushState({}, '', '/');
+
+    render(<App />);
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: /تسجيل الدخول/i })).toBeDefined();
+    });
   });
 
   it('login form submits and redirects by role (SUPER_ADMIN -> /admin)', async () => {
