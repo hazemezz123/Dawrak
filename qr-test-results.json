@@ -1,0 +1,21 @@
+{
+  "title": "شؤون الطلاب",
+  "location": "→ الرئيسية",
+  "encodedUrl": "http://localhost:5173/w/00000000-0000-4000-8000-000000000001",
+  "svgDimensions": {
+    "x": 68.078125,
+    "y": 69,
+    "width": 16,
+    "height": 16,
+    "top": 69,
+    "right": 84.078125,
+    "bottom": 85,
+    "left": 68.078125
+  },
+  "pageCount": 1,
+  "screenshots": [
+    "qr-window-1-360px.png",
+    "qr-window-1-1280px.png",
+    "qr-window-1-print.pdf"
+  ]
+}

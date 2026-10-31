@@ -1,0 +1,159 @@
+{
+  "stepA": {
+    "status": "PASS",
+    "details": "Created 3 separate student browser contexts (separate storage/cookies) and 1 staff context."
+  },
+  "stepB": {
+    "status": "PASS",
+    "details": "All 3 students opened the window page and selected \"استخراج إفادة\"."
+  },
+  "stepC": {
+    "status": "PASS",
+    "numbers": [
+      1,
+      2,
+      3
+    ],
+    "text": "Student 1 = #1, Student 2 = #2, Student 3 = #3"
+  },
+  "stepD": {
+    "status": "PASS",
+    "windowTitle": "شؤون الطلاب",
+    "calledCardText": "الدور الحالي المستدعىلا يوجد دور حالياضغط على زر \"التالي\" لاستدعاء التذكرة الأولى في الطابور",
+    "waitingCount": 3,
+    "waitingListItems": [
+      "#1تذكرة #1استخراج إفادة٠٢:١١ ص",
+      "#2تذكرة #2استخراج إفادة٠٢:١١ ص",
+      "#3تذكرة #3استخراج إفادة٠٢:١١ ص"
+    ]
+  },
+  "stepE": {
+    "status": "PASS",
+    "nextRequestPayload": {
+      "url": "http://localhost:5173/api/windows/00000000-0000-4000-8000-000000000001/next",
+      "postData": "{}"
+    },
+    "staffCalledTicket": "1",
+    "student1CalledBannerFound": true,
+    "onScreenText": "حان دورك الآن! يرجى التوجه إلى الشباك وتقديم أوراقك للموظف فوراً"
+  },
+  "stepF": {
+    "status": "PASS",
+    "s1BackToWaiting": true,
+    "staffScreen": {
+      "calledCardText": "الدور الحالي المستدعىلا يوجد دور حالياضغط على زر \"التالي\" لاستدعاء التذكرة الأولى في الطابور",
+      "nextBtnDisabled": false,
+      "skipBtnDisabled": true,
+      "waitingCount": 3,
+      "waitingItems": [
+        "#1تذكرة #2استخراج إفادة٠٢:١١ ص",
+        "#2تذكرة #3استخراج إفادة٠٢:١١ ص",
+        "#3تذكرة #1استخراج إفادةمؤجل (تخطي سابق)٠٢:١١ ص"
+      ],
+      "feedbackMessage": "تم تخطي التذكرة رقم 1 وتأخيرها في قائمة الانتظار."
+    },
+    "skipRequestDetails": {
+      "url": "http://localhost:5173/api/windows/00000000-0000-4000-8000-000000000001/skip",
+      "method": "POST",
+      "sentCurrentTicketId": true,
+      "currentTicketId": "a1c385a5-47b2-472a-b9d3-b757538c8106",
+      "rawPostData": "{\"currentTicketId\":\"a1c385a5-47b2-472a-b9d3-b757538c8106\"}"
+    }
+  },
+  "stepG": {
+    "status": "PASS",
+    "calledTicket": "2",
+    "nextRequestPayload": {
+      "postData": "{}"
+    },
+    "student2CalledBanner": true,
+    "text": "تم استدعاء التذكرة رقم 2 وظهور بانر حان دورك الآن! لدى الطالب 2"
+  },
+  "stepH": {
+    "status": "PASS",
+    "emptyCalledCardText": "الدور الحالي المستدعىلا يوجد دور حاليقائمة الانتظار فارغة حالياً",
+    "waitingSectionText": "قائمة الانتظار0 بانتظار الخدمةقائمة الانتظار فارغة حالياًسيظهر الطلاب في هذه القائمة فور مسح رمز QR وطلب الخدمة",
+    "feedbackMessage": "تم إنهاء خدمة التذكرة، وقائمة الانتظار فارغة حالياً.",
+    "errorShows": false
+  },
+  "stepI": {
+    "status": "PASS",
+    "activeBannerFound": true,
+    "activeBannerText": "لديك تذكرة نشطة حالياًيمكنك متابعة دورك وموقعك مباشرةعرض تذكرتي",
+    "activeLinkHref": "/w/00000000-0000-4000-8000-000000000001/ticket/d21f5ea8-a43e-467f-9dc4-e9a57beb8a99",
+    "activeLinkText": "عرض تذكرتي",
+    "preventedSecondTicket": true,
+    "alertMessage": "لديك تذكرة نشطة بالفعل في هذا الشباك.اضغط هنا للانتقال إلى تذكرتك الحالية"
+  },
+  "skipRequestDetails": {
+    "url": "http://localhost:5173/api/windows/00000000-0000-4000-8000-000000000001/skip",
+    "method": "POST",
+    "sentCurrentTicketId": true,
+    "currentTicketId": "a1c385a5-47b2-472a-b9d3-b757538c8106",
+    "rawPostData": "{\"currentTicketId\":\"a1c385a5-47b2-472a-b9d3-b757538c8106\"}"
+  },
+  "staffScreenAfterSkip": {
+    "calledCardText": "الدور الحالي المستدعىلا يوجد دور حالياضغط على زر \"التالي\" لاستدعاء التذكرة الأولى في الطابور",
+    "nextBtnDisabled": false,
+    "skipBtnDisabled": true,
+    "waitingCount": 3,
+    "waitingItems": [
+      "#1تذكرة #2استخراج إفادة٠٢:١١ ص",
+      "#2تذكرة #3استخراج إفادة٠٢:١١ ص",
+      "#3تذكرة #1استخراج إفادةمؤجل (تخطي سابق)٠٢:١١ ص"
+    ],
+    "feedbackMessage": "تم تخطي التذكرة رقم 1 وتأخيرها في قائمة الانتظار."
+  },
+  "visualChecks": {
+    "bannerOverlapCheck": {
+      "topBarRect": {
+        "x": 16,
+        "y": 16,
+        "width": 328,
+        "height": 26,
+        "top": 16,
+        "right": 344,
+        "bottom": 42,
+        "left": 16
+      },
+      "bannerRect": {
+        "x": 16,
+        "y": 58,
+        "width": 328,
+        "height": 144,
+        "top": 58,
+        "right": 344,
+        "bottom": 202,
+        "left": 16
+      },
+      "overlaps": false,
+      "distance": 16
+    },
+    "staff360Buttons": {
+      "viewportHeight": 740,
+      "viewportWidth": 360,
+      "scrollY": 0,
+      "nextRect": {
+        "top": 441,
+        "bottom": 505,
+        "height": 64
+      },
+      "skipRect": {
+        "top": 521,
+        "bottom": 585,
+        "height": 64
+      },
+      "nextFullyVisible": true,
+      "skipFullyVisible": true
+    }
+  },
+  "screenshots": [
+    "student-service-page-360px.png",
+    "student-service-page-1280px.png",
+    "ticket-tracking-waiting-360px.png",
+    "ticket-tracking-called-360px.png",
+    "staff-panel-with-ticket-1280px.png",
+    "staff-panel-with-ticket-360px.png"
+  ],
+  "bugs": []
+}

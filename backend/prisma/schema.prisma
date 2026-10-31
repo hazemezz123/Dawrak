@@ -1,0 +1,123 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum TicketStatus {
+  waiting
+  called
+  served
+  cancelled
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  STAFF
+}
+
+model Window {
+  id        String   @id @default(uuid())
+  name      String
+  location  String
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  services Service[]
+  tickets  Ticket[]
+  staff    WindowStaff[]
+
+  @@map("windows")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  role         UserRole @default(STAFF)
+  isActive     Boolean  @default(true) @map("is_active")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  windows WindowStaff[]
+
+  @@map("users")
+}
+
+model Student {
+  id        String   @id @default(uuid())
+  fullName  String   @map("full_name")
+  phone     String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+
+  devices StudentDevice[]
+  tickets Ticket[]
+
+  @@map("students")
+}
+
+model StudentDevice {
+  id        String   @id @default(uuid())
+  deviceId  String   @unique @map("device_id")
+  studentId String   @map("student_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+  @@map("student_devices")
+}
+
+model WindowStaff {
+  windowId String @map("window_id")
+  userId   String @map("user_id")
+
+  window Window @relation(fields: [windowId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([windowId, userId])
+  @@map("window_staff")
+}
+
+model Service {
+  id       String  @id @default(uuid())
+  windowId String  @map("window_id")
+  name     String
+  isActive Boolean @default(true) @map("is_active")
+
+  window  Window   @relation(fields: [windowId], references: [id], onDelete: Cascade)
+  tickets Ticket[]
+
+  @@map("services")
+}
+
+// Note: Two partial unique indexes are added in raw SQL migrations, not in Prisma:
+// - tickets_active_device_per_window on (window_id, device_id)
+// - tickets_active_student_per_window on (student_id, window_id)
+// Both apply to active statuses ('waiting', 'called'). Prisma cannot express
+// partial indexes; they must not be removed by a future migrate diff.
+model Ticket {
+  id        String       @id @default(uuid())
+  windowId  String       @map("window_id")
+  serviceId String       @map("service_id")
+  deviceId  String       @map("device_id")
+  studentId String?      @map("student_id")
+  queueDate DateTime     @map("queue_date") @db.Date
+  number    Int
+  status    TicketStatus @default(waiting)
+  sortKey   Decimal      @map("sort_key")
+  skipCount Int          @default(0) @map("skip_count")
+  createdAt DateTime     @default(now()) @map("created_at")
+  calledAt  DateTime?    @map("called_at")
+
+  window  Window   @relation(fields: [windowId], references: [id], onDelete: Cascade)
+  service Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  student Student? @relation(fields: [studentId], references: [id], onDelete: SetNull)
+
+  @@unique([windowId, queueDate, number])
+  @@index([studentId])
+  @@map("tickets")
+}
